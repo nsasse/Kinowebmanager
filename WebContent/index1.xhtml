@@ -23,13 +23,12 @@
 	</h:form>
 	<br />
 	<br />
-	<h3>Hier können Sie die aktuellen Filme hochladen</h3>
-	<h:form>
-		<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
-			mode="advanced" dragDropSupport="false" update="messages"
-			sizeLimit="102400000" fileLimit="1" allowTypes="/(\.|\/)(csv|xml)$/" />
-
-		<p:growl id="messages" showDetail="true" />
-	</h:form>
+	<h3>Hier können Sie die aktuellen Filme, Werbespots und Kinosäle hochladen</h3>
+	<h:form>  
+    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                  multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(csv|png)$/" />
+ 
+    <p:growl id="messages" showDetail="true" />           
+</h:form>
 </h:body>
 </html>
