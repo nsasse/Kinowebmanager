@@ -47,19 +47,19 @@ public class FileUploadView {
 		String name = new String();
 		name = event.getFile().getFileName();
 
-		//if (name == "filme.csv") {
+		if (name.equals("filme.csv")) {
 			filme = event.getFile();
-		//}
+		}
 		
-		if (name == "saele.csv") {
+		if (name.equals("saele.csv")) {
 			saele = event.getFile();
 		}
 		
-		if (name == "werbespots.csv") {
+		if (name.equals("werbespots.csv")) {
 			werbespots = event.getFile();
 		}
 
-		if (counterFile >= 1) {
+		if (counterFile == 3) {
 			
 			XmlAusgabe ausgabe = new XmlAusgabe();
 
