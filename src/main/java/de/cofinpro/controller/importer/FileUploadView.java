@@ -42,13 +42,14 @@ public class FileUploadView {
 		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
-		System.out.println(event.getFile().getFileName());
+		//System.out.println(event.getFile().getFileName());
 		counterFile++;
 		String name = new String();
 		name = event.getFile().getFileName();
 
 		if (name.equals("filme.csv")) {
 			filme = event.getFile();
+			//System.out.println("Equals Film"); CHECK
 		}
 		
 		if (name.equals("saele.csv")) {
@@ -59,11 +60,13 @@ public class FileUploadView {
 			werbespots = event.getFile();
 		}
 
-		if (counterFile == 3) {
+		if (counterFile == 1) {
 			
 			XmlAusgabe ausgabe = new XmlAusgabe();
 
 			ausgabe.start(filme);
+			
+			System.out.println("Weitergabe Daten");
 		}
 
 	}
