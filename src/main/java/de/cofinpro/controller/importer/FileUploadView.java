@@ -3,7 +3,10 @@ package de.cofinpro.controller.importer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,13 +18,15 @@ import org.primefaces.model.UploadedFile;
 
 import de.cofinpro.controller.GlobalVariables;
 import de.cofinpro.controller.XmlAusgabe;
+import de.cofinpro.controller.dataView.DataTableColumn;
+import de.cofinpro.controller.dataView.TableItem;
 
+@SuppressWarnings("restriction")
 @ManagedBean(name = "fileUploadView")
 @SessionScoped
-//@ApplicationScoped
 
 public class FileUploadView {
-	
+		
 	public FileUploadView() {
 		System.out.println("Konstruktor");
 		
@@ -42,21 +47,12 @@ public class FileUploadView {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-	}
-
-	int counterFile = 0;
-	UploadedFile filme;
-	UploadedFile saele;
-	UploadedFile werbespots;
-	
+	}	
 
 	public void handleFileUpload(FileUploadEvent event) throws InvalidFormatException, IOException {
 		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
-		//System.out.println(event.getFile().getFileName());
-		
-		
 		String name = new String();
 		name = event.getFile().getFileName();
 		file = event.getFile();
@@ -64,6 +60,7 @@ public class FileUploadView {
 		BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputstream(), "UTF-8"));
 
 		if (name.equals("filme.csv")) {
+			addItemToList(br, name, "Film");
 			FilmImporter importFilme = new FilmImporter();
 			importFilme.readCsvFile(br);
 			GlobalVariables.DB_UPLOADER_COUNTER++;
@@ -71,6 +68,7 @@ public class FileUploadView {
 		}
 		
 		if (name.equals("saele.csv")) {
+			addItemToList(br, name, "Saele");
 			KinosaalImporter importKinosaele = new KinosaalImporter();
 			importKinosaele.readCsvFile(br);
 			GlobalVariables.DB_UPLOADER_COUNTER++;
@@ -78,25 +76,58 @@ public class FileUploadView {
 		}
 		
 		if (name.equals("werbespots.csv")) {
+			addItemToList(br, name, "Werbespot");
+			
 			WerbespotImporter importWerbespots = new WerbespotImporter();
 			importWerbespots.readCsvFile(br);
 			GlobalVariables.DB_UPLOADER_COUNTER++;
 			//System.out.println("Equals Werbespots"); //CHECK
 		}
 		
-		System.out.println(GlobalVariables.DB_UPLOADER_COUNTER);
-
+		//System.out.println(GlobalVariables.DB_UPLOADER_COUNTER);
+		
 		if (GlobalVariables.DB_UPLOADER_COUNTER == 3) {
 			
+			//Bestätigungsbutton einbauen!
 			XmlAusgabe ausgabe = new XmlAusgabe();
 
 			ausgabe.start();
 			
-			System.out.println("Weitergabe Daten");
+			//System.out.println("Weitergabe Daten");
 			
 			GlobalVariables.DB_UPLOADER_COUNTER = 0;
 			
 		}
 
+	}
+	
+	
+	private List<TableItem> itemList = new ArrayList<TableItem>();
+	private List<DataTableColumn> dataTableColumns = new ArrayList<DataTableColumn>();
+
+	@PostConstruct
+	public void init() {
+		// itemList.add(new TableItem("Test.csv", "br", 100, "Filme"));
+		// prepare dynamic columns
+		dataTableColumns.add(new DataTableColumn("Name", "fileName"));
+		dataTableColumns.add(new DataTableColumn("Inhalt", "br"));
+		dataTableColumns.add(new DataTableColumn("Size", "size"));
+		dataTableColumns.add(new DataTableColumn("Type", "type"));
+	}
+
+	public void addItemToList(BufferedReader br, String name, String type) {
+		itemList.add(new TableItem(name, br, 0, type));
+		// Size fehlt!
+		init();
+		//DATEN WERDEN NICHT ANGEZEIGT!!!!!!
+		
+	}
+
+	public List<TableItem> getItemList() {
+		return itemList;
+	}
+
+	public List<DataTableColumn> getDataTableColumns() {
+		return dataTableColumns;
 	}
 }

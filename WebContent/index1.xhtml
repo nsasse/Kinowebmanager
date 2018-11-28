@@ -22,13 +22,27 @@
 		<h:commandButton value="Say Hello" action="#{ResultBean.result}"></h:commandButton>
 	</h:form>
 	<br />
+
 	<br />
-	<h3>Hier können Sie die aktuellen Filme, Werbespots und Kinosäle hochladen</h3>
-	<h:form>  
-    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
-                  multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(csv|png)$/" />
- 
-    <p:growl id="messages" showDetail="true" />           
-</h:form>
+	<h3>Hier können Sie die aktuellen Filme, Werbespots und Kinosäle
+		hochladen</h3>
+	<h:form>
+		<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
+			mode="advanced" dragDropSupport="true" multiple="true"
+			update="messages" sizeLimit="10000000" fileLimit="3"
+			allowTypes="/(\.|\/)(csv|png)$/" />
+
+		<p:growl id="messages" showDetail="true" />
+	</h:form>
+	<h:form>
+	     <p:dataTable value="#{fileUploadView.itemList}" var="itemFile">
+		<p:columns value="#{fileUploadView.dataTableColumns}" var="column" sortBy="#{itemFile[column.property]}">
+		     <f:facet name="header">
+		         <h:outputText value="#{column.header}" />
+		     </f:facet>
+		         <h:outputText value="#{itemFile[column.property]}" />				       
+		</p:columns>
+	    </p:dataTable>
+	</h:form>
 </h:body>
 </html>
