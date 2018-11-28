@@ -1,23 +1,48 @@
 package de.cofinpro.controller.importer;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import de.cofinpro.controller.dao.impl.KinosaalDaoStaticImpl;
 import de.cofinpro.modul.Kinosaal;
 
 public class KinosaalImporter extends Importer {
 
 	int id = 0;
-	
+
 	public ArrayList<Kinosaal> kinosaeleListe = new ArrayList<Kinosaal>();
 
 	@Override
-	public final File readFile() {
+	public void readCsvFile(BufferedReader br) throws IOException {
+	
+		String line = "";
+		String cvsSplitBy = ";";
 
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource("saele.csv").getFile());
+		try {
 
-		return file;
+			while ((line = br.readLine()) != null) {
+				String[] stringDateityp = line.split(cvsSplitBy);
+
+				transform(stringDateityp);
+			}
+		}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 	@Override
@@ -27,8 +52,8 @@ public class KinosaalImporter extends Importer {
 		Integer anzSitzeP = intCheck(input[1]);
 		Integer anzSitzeL = intCheck(input[2]);
 		String dreiDS = input[3];
-		//dreiDS.toLowerCase(); //Anpassung des Input-Strings
-		//Boolean Werte werden nicht erkannt
+		// dreiDS.toLowerCase(); //Anpassung des Input-Strings
+		// Boolean Werte werden nicht erkannt
 		Boolean dreiD = booleanCheck(dreiDS);
 
 		Kinosaal kinosaal = new Kinosaal();

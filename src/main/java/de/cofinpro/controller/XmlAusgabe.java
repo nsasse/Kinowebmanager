@@ -4,14 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.primefaces.model.UploadedFile;
-
 import de.cofinpro.controller.dao.impl.ProgrammDaoStaticImpl;
 import de.cofinpro.controller.exporter.WriteExcelFileProgramm;
 import de.cofinpro.controller.exporter.WriteExcelFileRaumplan;
-import de.cofinpro.controller.importer.FilmImporter;
-import de.cofinpro.controller.importer.KinosaalImporter;
-import de.cofinpro.controller.importer.WerbespotImporter;
 import de.cofinpro.controller.service.ErstellungProgramm;
 import de.cofinpro.modul.Programm;
 
@@ -23,17 +18,10 @@ public class XmlAusgabe {
 
 	}
 	
-	public void start(UploadedFile uploadedFile) throws IOException {
-		FilmImporter importFilme = new FilmImporter();
-		KinosaalImporter importKinosaele = new KinosaalImporter();
-		WerbespotImporter importWerbespots = new WerbespotImporter();
-
+	public void start() throws IOException {
+		
 		ProgrammDaoStaticImpl erstellungProgrammDao = new ProgrammDaoStaticImpl();
 		ErstellungProgramm erstellungProgramm = new ErstellungProgramm();
-
-		importWerbespots.readCsvFile();
-		importFilme.readCsvFile(uploadedFile);
-		importKinosaele.readCsvFile();
 
 		ArrayList<Programm> programmListe = new ArrayList<Programm>();
 		erstellungProgramm.generateProgramm();

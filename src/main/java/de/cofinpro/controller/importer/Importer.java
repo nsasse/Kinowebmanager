@@ -1,52 +1,17 @@
 package de.cofinpro.controller.importer;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+
 public abstract class Importer {
 
-	public void readCsvFile() {
-
-		File fileRead = readFile();
-
-		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = ";";
-
-		try {
-
-			br = new BufferedReader(new FileReader(fileRead));
-			while ((line = br.readLine()) != null) {
-				String[] stringDateityp = line.split(cvsSplitBy);
-
-				transform(stringDateityp);
-			}
-		}
-
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
+	public abstract void readCsvFile(BufferedReader br) throws IOException;
 
 	public abstract void transform(String[] input);
 
-	public abstract File readFile();
 
 	public static final Integer intCheck(String text) {
 		if (Pattern.compile("-?[0-9]+").matcher(text).find()) {

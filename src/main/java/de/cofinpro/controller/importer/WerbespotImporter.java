@@ -1,8 +1,12 @@
 package de.cofinpro.controller.importer;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+
 import de.cofinpro.controller.dao.impl.WerbespotDaoStaticImpl;
 import de.cofinpro.modul.Werbespot;
 
@@ -10,15 +14,37 @@ public class WerbespotImporter extends Importer {
 
 	private int id = 60000;
 
-	//private ArrayList<Werbespot> werbespotListe = new ArrayList<Werbespot>();
+	@SuppressWarnings("unused")
+	private ArrayList<Werbespot> werbespotListe = new ArrayList<Werbespot>();
 
 	@Override
-	public final File readFile() {
+	public void readCsvFile(BufferedReader br) throws IOException {
 
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource("werbespots.csv").getFile());
+		String line = "";
+		String cvsSplitBy = ";";
 
-		return file;
+		try {
+
+			while ((line = br.readLine()) != null) {
+				String[] stringDateityp = line.split(cvsSplitBy);
+
+				transform(stringDateityp);
+			}
+		}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	@Override
