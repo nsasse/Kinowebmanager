@@ -3,10 +3,16 @@ package de.cofinpro.controller.exporter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import de.cofinpro.controller.dao.impl.ProgrammDaoStaticImpl;
 import de.cofinpro.controller.service.ErstellungProgramm;
 import de.cofinpro.modul.Programm;
+
+@ManagedBean(name = "xml")
+@SessionScoped
 
 public class XmlAusgabe {
 
@@ -45,6 +51,11 @@ public class XmlAusgabe {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void export() throws IOException {
+		start();
+		
 	}
 
 }

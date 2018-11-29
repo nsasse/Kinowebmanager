@@ -1,7 +1,6 @@
 package de.cofinpro.controller.importer;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import org.primefaces.model.UploadedFile;
 import de.cofinpro.controller.GlobalVariables;
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
-import de.cofinpro.controller.exporter.XmlAusgabe;
 
 @SuppressWarnings("restriction")
 @ManagedBean(name = "fileUploadView")
@@ -86,19 +84,9 @@ public class FileUploadView {
 			//System.out.println("Equals Werbespots"); //CHECK
 		}
 		
-		//System.out.println(GlobalVariables.DB_UPLOADER_COUNTER);
-		
 		if (GlobalVariables.DB_UPLOADER_COUNTER == 3) {
 			
-			//Bestätigungsbutton einbauen!
-			XmlAusgabe ausgabe = new XmlAusgabe();
-
-			ausgabe.start();
-			
-			//System.out.println("Weitergabe Daten");
-			
 			GlobalVariables.DB_UPLOADER_COUNTER = 0;
-			
 		}
 
 	}
