@@ -16,7 +16,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import de.cofinpro.controller.GlobalVariables;
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
 
@@ -25,10 +24,10 @@ import de.cofinpro.controller.dataView.TableItem;
 @SessionScoped
 
 public class FileUploadView {
-		
+
 	public FileUploadView() {
 		System.out.println("Konstruktor");
-		
+
 	}
 
 	private UploadedFile file;
@@ -46,67 +45,54 @@ public class FileUploadView {
 			FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
-	}	
+	}
 
 	public void handleFileUpload(FileUploadEvent event) throws InvalidFormatException, IOException {
 		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
+		String type = new String();
 		String name = new String();
 		long size = event.getFile().getSize();
 		name = event.getFile().getFileName();
 		file = event.getFile();
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputstream(), "UTF-8"));
 
 		if (name.equals("filme.csv")) {
-			addItemToList(br, name, size, "Film");
-			FilmImporter importFilme = new FilmImporter();
-			importFilme.readCsvFile(br);
-			GlobalVariables.DB_UPLOADER_COUNTER++;
-			//System.out.println("Equals Film"); //CHECK
-		}
-		
-		if (name.equals("saele.csv")) {
-			addItemToList(br, name, size, "Saele");
-			KinosaalImporter importKinosaele = new KinosaalImporter();
-			importKinosaele.readCsvFile(br);
-			GlobalVariables.DB_UPLOADER_COUNTER++;
-			//System.out.println("Equals Säle"); //CHECK
-		}
-		
-		if (name.equals("werbespots.csv")) {
-			addItemToList(br, name, size, "Werbespot");
-			
-			WerbespotImporter importWerbespots = new WerbespotImporter();
-			importWerbespots.readCsvFile(br);
-			GlobalVariables.DB_UPLOADER_COUNTER++;
-			//System.out.println("Equals Werbespots"); //CHECK
-		}
-		
-		if (GlobalVariables.DB_UPLOADER_COUNTER == 3) {
-			
-			GlobalVariables.DB_UPLOADER_COUNTER = 0;
+			type = "Filme";
 		}
 
+		else if (name.equals("saele.csv")) {
+			type = "Saele";
+		}
+
+		else if (name.equals("werbespots.csv")) {
+			type = "Werbespots";
+		} else {
+			System.out.println("Fehlerhafte Dateibenennung");
+			type = "Sonstiges";
+		}
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputstream(), "UTF-8"));
+		addItemToList(br, name, size, type);
+
 	}
-	
-	
+
+	// Erzeugung der Tabel
+
 	private List<TableItem> itemList = new ArrayList<TableItem>();
 	private List<DataTableColumn> dataTableColumns = new ArrayList<DataTableColumn>();
 
 	@PostConstruct
 	public void init() {
-		// itemList.add(new TableItem("Test.csv", "br", 100, "Filme"));
-		// prepare dynamic columns
+		// Spalten erzeugen
 		dataTableColumns.add(new DataTableColumn("Name", "fileName"));
 		dataTableColumns.add(new DataTableColumn("Inhalt", "br"));
-		dataTableColumns.add(new DataTableColumn("Size", "size"));
+		dataTableColumns.add(new DataTableColumn("Size (kb)", "size"));
 		dataTableColumns.add(new DataTableColumn("Type", "type"));
 	}
 
 	public void addItemToList(BufferedReader br, String name, long size, String type) {
-		itemList.add(new TableItem(name, br, size,  type));
+		itemList.add(new TableItem(name, br, size, type));
 	}
 
 	public List<TableItem> getItemList() {
@@ -115,5 +101,37 @@ public class FileUploadView {
 
 	public List<DataTableColumn> getDataTableColumns() {
 		return dataTableColumns;
+	}
+
+	// Übertragung der Daten in der Datenbank
+	public void saveFiles() throws IOException {
+
+		for (int i = 0; i < itemList.size(); i++) {
+
+			String type = itemList.get(i).getType();
+			BufferedReader br = itemList.get(i).getBr();
+			
+			
+			if (type.equals("Filme")) {
+				FilmImporter importFilme = new FilmImporter();
+				importFilme.readCsvFile(br);
+			}
+
+			else if (type.equals("Saele")) {
+				KinosaalImporter importKinosaele = new KinosaalImporter();
+				importKinosaele.readCsvFile(br);
+			}
+
+			else if (type.equals("Werbespots")) {
+				WerbespotImporter importWerbespots = new WerbespotImporter();
+				importWerbespots.readCsvFile(br);
+			}
+
+			else {
+				System.out.println("Fehlerhafte Dateibenennung (NUR: Filme.csv, Saele.csv, Werbespots.csv)");
+			}
+
+		}
+
 	}
 }

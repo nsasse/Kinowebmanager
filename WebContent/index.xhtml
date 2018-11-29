@@ -63,14 +63,19 @@
 				<button type="button" class="btn btn-kino"
 					onclick="location.reload()">Aktualisieren</button>
 			</div>
-			<div class="col-1"></div>
+			<div class="col-3">
+				<h:form>
+					<h:commandButton value="In Datenbank speichern"
+						action="#{fileUploadView.saveFiles}" styleClass="btn btn-kino" />
+				</h:form>
+			</div>
 			<div class="col-2">
 				<h:form>
 					<h:commandButton value="XML Export" action="#{xml.start}"
 						styleClass="btn btn-kino" />
 				</h:form>
 			</div>
-			<div class="col-6"></div>
+			<div class="col-4"></div>
 		</div>
 	</div>
 	<noscript>
