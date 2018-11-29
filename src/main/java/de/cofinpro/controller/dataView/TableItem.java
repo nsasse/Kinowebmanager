@@ -5,10 +5,10 @@ import java.io.BufferedReader;
 public class TableItem {
 	private String fileName;
 	private BufferedReader br;
-	private int size;
+	private long size;
 	private String type;
 
-	public TableItem(String fileName,BufferedReader br, int size, String type) {
+	public TableItem(String fileName,BufferedReader br, long size, String type) {
 		this.fileName = fileName;
 		this.br = br;
 		this.size = size;
@@ -23,7 +23,7 @@ public class TableItem {
 		return br;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 

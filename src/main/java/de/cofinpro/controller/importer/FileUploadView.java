@@ -1,6 +1,7 @@
 package de.cofinpro.controller.importer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -17,9 +18,9 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import de.cofinpro.controller.GlobalVariables;
-import de.cofinpro.controller.XmlAusgabe;
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
+import de.cofinpro.controller.exporter.XmlAusgabe;
 
 @SuppressWarnings("restriction")
 @ManagedBean(name = "fileUploadView")
@@ -54,13 +55,14 @@ public class FileUploadView {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 		String name = new String();
+		long size = event.getFile().getSize();
 		name = event.getFile().getFileName();
 		file = event.getFile();
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputstream(), "UTF-8"));
 
 		if (name.equals("filme.csv")) {
-			addItemToList(br, name, "Film");
+			addItemToList(br, name, size, "Film");
 			FilmImporter importFilme = new FilmImporter();
 			importFilme.readCsvFile(br);
 			GlobalVariables.DB_UPLOADER_COUNTER++;
@@ -68,7 +70,7 @@ public class FileUploadView {
 		}
 		
 		if (name.equals("saele.csv")) {
-			addItemToList(br, name, "Saele");
+			addItemToList(br, name, size, "Saele");
 			KinosaalImporter importKinosaele = new KinosaalImporter();
 			importKinosaele.readCsvFile(br);
 			GlobalVariables.DB_UPLOADER_COUNTER++;
@@ -76,7 +78,7 @@ public class FileUploadView {
 		}
 		
 		if (name.equals("werbespots.csv")) {
-			addItemToList(br, name, "Werbespot");
+			addItemToList(br, name, size, "Werbespot");
 			
 			WerbespotImporter importWerbespots = new WerbespotImporter();
 			importWerbespots.readCsvFile(br);
@@ -115,12 +117,8 @@ public class FileUploadView {
 		dataTableColumns.add(new DataTableColumn("Type", "type"));
 	}
 
-	public void addItemToList(BufferedReader br, String name, String type) {
-		itemList.add(new TableItem(name, br, 0, type));
-		// Size fehlt!
-		init();
-		//DATEN WERDEN NICHT ANGEZEIGT!!!!!!
-		
+	public void addItemToList(BufferedReader br, String name, long size, String type) {
+		itemList.add(new TableItem(name, br, size,  type));
 	}
 
 	public List<TableItem> getItemList() {

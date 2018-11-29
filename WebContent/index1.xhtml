@@ -1,48 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Kinowebmanager</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 </h:head>
 <h:body>
-	<h3>Kinowebmanager</h3>
-	<h:form>
-		<h3>
-			Es ist
-			<h:outputLabel> #{MainBean.currentTime}</h:outputLabel>
-			Uhr.
-		</h3>
-		Ihr Name?
-		<h:inputText value="#{MainBean.name}"></h:inputText>
-		<h:commandButton value="Say Hello" action="#{ResultBean.result}"></h:commandButton>
-	</h:form>
-	<br />
+	<div class="container">
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<h3>Kinowebmanager</h3>
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<h:form>
+					<h3>
+						Es ist
+						<h:outputLabel> #{MainBean.currentTime}</h:outputLabel>
+						Uhr.
+					</h3>
+					Ihr Name?
+					<h:inputText value="#{MainBean.name}"></h:inputText>
+					<h:commandButton value="Say Hello" action="#{ResultBean.result}"></h:commandButton>
+				</h:form>
+				<br />
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<h3>Hier können Sie die aktuellen Filme, Werbespots und Kinosäle
+					hochladen</h3>
+				<h:form>
+					<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
+					 multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(csv|png)$/" onchange="location.reload()" />
 
-	<br />
-	<h3>Hier können Sie die aktuellen Filme, Werbespots und Kinosäle
-		hochladen</h3>
-	<h:form>
-		<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}"
-			mode="advanced" dragDropSupport="true" multiple="true"
-			update="messages" sizeLimit="10000000" fileLimit="3"
-			allowTypes="/(\.|\/)(csv|png)$/" />
-
-		<p:growl id="messages" showDetail="true" />
-	</h:form>
-	<h:form>
-	     <p:dataTable value="#{fileUploadView.itemList}" var="itemFile">
-		<p:columns value="#{fileUploadView.dataTableColumns}" var="column" sortBy="#{itemFile[column.property]}">
-		     <f:facet name="header">
-		         <h:outputText value="#{column.header}" />
-		     </f:facet>
-		         <h:outputText value="#{itemFile[column.property]}" />				       
-		</p:columns>
-	    </p:dataTable>
-	</h:form>
+					<p:growl id="messages" showDetail="true"/>
+				</h:form>
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<h:form>
+					<p:dataTable value="#{fileUploadView.itemList}" id="list1" var="itemFile">
+						<p:columns value="#{fileUploadView.dataTableColumns}" var="column" sortBy="#{itemFile[column.property]}">
+							<f:facet name="header">
+								<h:outputText value="#{column.header}" />
+							</f:facet>
+							<h:outputText value="#{itemFile[column.property]}" />
+						</p:columns>
+						<!--  AJAX einfügen-->
+					</p:dataTable>
+				</h:form>
+				<br />
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-2">
+				<button type="button" class="btn btn-kino" onclick="location.reload()">Aktualisieren</button>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-2">
+				<button type="button" class="btn btn-kino">XML Export</button>
+			</div>
+			<div class="col-6"></div>
+		</div>
+	</div>
+	<noscript>
+		Javascript ist nicht verfügbar oder es ist deaktiviert.<br />
+		<br />
+		Bitte verwenden Sie einen Browser, der Javascript unterstützt<br />
+		oder aktivieren Sie Javascript in Ihrem Browser.<br />
+	</noscript>
+	<script src="/js/bootstrap.js"></script>
 </h:body>
+
 </html>
