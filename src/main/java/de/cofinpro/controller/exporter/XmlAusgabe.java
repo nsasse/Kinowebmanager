@@ -52,10 +52,4 @@ public class XmlAusgabe {
 			e.printStackTrace();
 		}
 	}
-	
-	public void export() throws IOException {
-		start();
-		
-	}
-
 }

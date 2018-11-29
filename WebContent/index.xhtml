@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
- xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Kinowebmanager</title>
@@ -21,11 +23,14 @@
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
-				<h3>Hier können Sie die aktuellen Filme, Werbespots und
-					Kinosäle hochladen</h3>
+				<h4>Hier können Sie die aktuellen Filme, Werbespots und
+					Kinosäle hochladen</h4>
 				<h:form>
-					<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
-					 multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(csv|png)$/" />
+					<p:fileUpload
+						fileUploadListener="#{fileUploadView.handleFileUpload}"
+						mode="advanced" dragDropSupport="true" multiple="true"
+						update="messages" sizeLimit="10000000" fileLimit="3"
+						allowTypes="/(\.|\/)(csv|png)$/" />
 
 					<p:growl id="messages" showDetail="true" />
 				</h:form>
@@ -36,8 +41,10 @@
 			<div class="col-1"></div>
 			<div class="col-10">
 				<h:form>
-					<p:dataTable value="#{fileUploadView.itemList}" id="list1" var="itemFile">
-						<p:columns value="#{fileUploadView.dataTableColumns}" var="column" sortBy="#{itemFile[column.property]}">
+					<p:dataTable value="#{fileUploadView.itemList}" id="list1"
+						var="itemFile">
+						<p:columns value="#{fileUploadView.dataTableColumns}" var="column"
+							sortBy="#{itemFile[column.property]}">
 							<f:facet name="header">
 								<h:outputText value="#{column.header}" />
 							</f:facet>
@@ -53,12 +60,14 @@
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-2">
-				<button type="button" class="btn btn-kino" onclick="location.reload()">Aktualisieren</button>
+				<button type="button" class="btn btn-kino"
+					onclick="location.reload()">Aktualisieren</button>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-2">
 				<h:form>
-					<h:commandButton value="XML Export" action="#{xml.start}" styleClass="btn btn-kino" />
+					<h:commandButton value="XML Export" action="#{xml.start}"
+						styleClass="btn btn-kino" />
 				</h:form>
 			</div>
 			<div class="col-6"></div>
