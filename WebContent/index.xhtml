@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Kinowebmanager</title>
@@ -26,11 +24,8 @@
 				<h4>Hier können Sie die aktuellen Filme, Werbespots und
 					Kinosäle hochladen</h4>
 				<h:form>
-					<p:fileUpload
-						fileUploadListener="#{fileUploadView.handleFileUpload}"
-						mode="advanced" dragDropSupport="true" multiple="true"
-						update="messages" sizeLimit="10000000" fileLimit="3"
-						allowTypes="/(\.|\/)(csv|png)$/" />
+					<p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
+					 multiple="true" update="messages" sizeLimit="10000000" fileLimit="3" allowTypes="/(\.|\/)(csv|png)$/" />
 
 					<p:growl id="messages" showDetail="true" />
 				</h:form>
@@ -41,10 +36,8 @@
 			<div class="col-1"></div>
 			<div class="col-10">
 				<h:form>
-					<p:dataTable value="#{fileUploadView.itemList}" id="list1"
-						var="itemFile">
-						<p:columns value="#{fileUploadView.dataTableColumns}" var="column"
-							sortBy="#{itemFile[column.property]}">
+					<p:dataTable value="#{fileUploadView.itemList}" id="list1" var="itemFile">
+						<p:columns value="#{fileUploadView.dataTableColumns}" var="column" sortBy="#{itemFile[column.property]}">
 							<f:facet name="header">
 								<h:outputText value="#{column.header}" />
 							</f:facet>
@@ -60,22 +53,139 @@
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-2">
-				<button type="button" class="btn btn-kino"
-					onclick="location.reload()">Aktualisieren</button>
+				<h:form>
+					<h:commandButton value="Aktualisieren" onclick="location.reload()" styleClass="btn btn-kino" />
+				</h:form>
 			</div>
 			<div class="col-3">
 				<h:form>
-					<h:commandButton value="In Datenbank speichern"
-						action="#{fileUploadView.saveFiles}" styleClass="btn btn-kino" />
+					<h:commandButton value="In Datenbank speichern" action="#{fileUploadView.saveFiles}" styleClass="btn btn-kino" />
 				</h:form>
 			</div>
 			<div class="col-2">
 				<h:form>
-					<h:commandButton value="XML Export" action="#{xml.start}"
-						styleClass="btn btn-kino" />
+					<h:commandButton value="XML Export" action="#{xml.start}" styleClass="form-control" />
 				</h:form>
+				<br />
+				<br />
 			</div>
 			<div class="col-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-10">
+				<h4>Einen Film hinzufügen</h4>
+				<h:form>
+					<div class="row">
+						<div class="col-3">
+							<p>Filmname</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmName" value="#{filmFormular.name}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>SELECTOR Genre</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmGenre" value="#{filmFormular.genre}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Regisseur</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmRegisseur" value="#{filmFormular.regisseur}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>SELECTOR SPRACHE</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmSprache" value="#{filmFormular.sprache}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Erscheinungsjahr</p>
+						</div>
+						<div class="col-9">
+							<p:inputNumber id="filmErscheinungsjahr" value="#{filmFormular.erscheinungsjahr}" minValue="1800" maxValue="2050"
+							 decimalPlaces="0" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Erscheinungsland</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmErscheinungsland" value="#{filmFormular.erscheinungsland}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>SELECTOR FSK</p>
+						</div>
+						<div class="col-9">
+							<h:inputText id="filmFSK" value="#{filmFormular.fsk}" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Spieldauer</p>
+						</div>
+						<div class="col-9">
+							<p:inputNumber id="filmSpieldauer" value="#{filmFormular.spieldauer}" decimalPlaces="0" symbol=" min"
+							 symbolPosition="s" minValue="1" />
+							<!-- symbol=" min" -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Beliebtheit</p>
+						</div>
+						<div class="col-9">
+							<p:inputNumber id="filmBeliebtheit" value="#{filmFormular.beliebtheit}" minValue="0" maxValue="100" symbol=" %"
+							 symbolPosition="s" decimalPlaces="0" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Kosten</p>
+						</div>
+						<div class="col-9">
+							<p:inputNumber id="filmKosten" value="#{filmFormular.kosten}" minValue="0" symbol=" €" symbolPosition="s"
+							 decimalPlaces="2" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>CHECKBOX 3D</p>
+						</div>
+						<div class="col-9">
+							<!--CHECKBOX-->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Effektivität</p>
+						</div>
+						<div class="col-9">
+							<p:inputNumber id="filmEff" value="#{filmFormular.eff}" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<h:commandButton value="Speichern" action="#{filmFormular.save}" styleClass="btn btn-kino" />
+						</div>
+					</div>
+				</h:form>
+
+			</div>
+			<div class="col-1"></div>
 		</div>
 	</div>
 	<noscript>
