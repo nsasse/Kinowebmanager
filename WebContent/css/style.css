@@ -9,6 +9,12 @@ html, body{
     margin: 1%;
 }
 
+/*Funktioniert nicht*/
+.xheader{
+background-color: #ED7F00 !important;
+color: #FFFFFF !important;
+height: 10vh;
+}
 
 /*Bootstrap Einstellungen*/
 .btn-kino { 

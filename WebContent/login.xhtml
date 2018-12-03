@@ -10,25 +10,26 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 </h:head>
 <h:body>
-    <div class="container">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
+    <nav class="navbar navbar-expand-lg xheader">
+        <div class="col-1"></div>
+        <div class="col-3">
+            <a class="navbar-brand" href="index.xhtml">
                 <img src="resources/img/kinomanager.png" alt="logo" /><br />
-            </div>
-            <div class="col-1"></div>
+            </a>
         </div>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <h3>Mitarbeiterlogin</h3>
-                <br />
-
-
-
-            </div>
-            <div class="col-1"></div>
+        <div class="col-3">
+            <h3 class="headerTitle">Kinowebmanager - Login</h3>
         </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+            <h:form>
+                <h:commandButton value="Zurück" action="#{mainBean.start}" styleClass="btn btn-kino" />
+            </h:form>
+        </div>
+        <div class="col-1"></div>
+    </nav>
+
+    <div class="container">
         <h:form>
             <div class="row">
                 <div class="col-3">
@@ -47,13 +48,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-1"></div>
+                <div class="col-9"></div>
+                <!--Zurückbutton-->
                 <div class="col-2">
                     <br />
                     <h:commandButton value="Login" action="#{loginBean.check}" styleClass="btn btn-kino" />
                     <br />
                 </div>
-                <div class="col-9"></div>
+                <div class="col-1"></div>
             </div>
         </h:form>
     </div>

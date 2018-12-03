@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "loginBean")
@@ -20,6 +21,10 @@ public class LoginBean implements Serializable {
 	public LoginBean() {
 		userSecure = "admin";
 		passwordSecure= "admin";
+	}
+	
+	public void start() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/Kinowebmanager/login.xhtml");
 	}
 
 	public String getUser() {
@@ -55,11 +60,11 @@ public class LoginBean implements Serializable {
 		
 		if (status == true) {
 			System.out.println("PW true");
-			//WEITERLEITUNG AUF ADMINSEITE
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/Kinowebmanager/admin.xhtml"); 
 		}
 		else {
 			System.out.println("PW false");
-			//FEHLERMELDUNG
+			//Fehlermeldung
 		}
 	}
 }
