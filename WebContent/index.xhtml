@@ -105,7 +105,12 @@
 							<p>SELECTOR SPRACHE</p>
 						</div>
 						<div class="col-9">
-							<h:inputText id="filmSprache" value="#{filmFormular.sprache}" styleClass="form-control" />
+							<h:selectOneMenu class="form-control" id="txt1" value="#{filmFormular.sprache}" required="true" label="Selector 1:">
+								<f:selectItem itemLabel="Deutsch" itemValue="Deutsch"  />
+								<f:selectItem itemLabel="Englisch" itemValue="Englisch" />
+								<f:selectItem itemLabel="Spanisch" itemValue="Spanisch" />
+							</h:selectOneMenu>
+							<p:message for="txt1" />
 						</div>
 					</div>
 					<div class="row">
@@ -113,8 +118,7 @@
 							<p>Erscheinungsjahr</p>
 						</div>
 						<div class="col-9">
-							<p:inputNumber id="filmErscheinungsjahr" value="#{filmFormular.erscheinungsjahr}" minValue="1800" maxValue="2050"
-							 decimalPlaces="0" />
+							<p:inputNumber id="filmErscheinungsjahr" value="#{filmFormular.erscheinungsjahr}" minValue="1800" decimalPlaces="0" />
 						</div>
 					</div>
 					<div class="row">
@@ -130,7 +134,14 @@
 							<p>SELECTOR FSK</p>
 						</div>
 						<div class="col-9">
-							<h:inputText id="filmFSK" value="#{filmFormular.fsk}" styleClass="form-control" />
+							<h:selectOneMenu class="form-control" id="txt2" value="#{filmFormular.fsk}" required="true" label="Selector 1:">
+								<f:selectItem itemLabel="0" itemValue="0" />
+								<f:selectItem itemLabel="6" itemValue="6" />
+								<f:selectItem itemLabel="12" itemValue="12" />
+								<f:selectItem itemLabel="16" itemValue="16" />
+								<f:selectItem itemLabel="18" itemValue="18" />
+							</h:selectOneMenu>
+							<p:message for="txt2" />
 						</div>
 					</div>
 					<div class="row">
@@ -157,7 +168,7 @@
 							<p>Kosten</p>
 						</div>
 						<div class="col-9">
-							<p:inputNumber id="filmKosten" value="#{filmFormular.kosten}" minValue="0" symbol=" €" symbolPosition="s"
+							<p:inputNumber id="filmKosten" value="#{filmFormular.kostenS}" minValue="0" symbol=" €" symbolPosition="s"
 							 decimalPlaces="2" />
 						</div>
 					</div>
@@ -166,7 +177,11 @@
 							<p>CHECKBOX 3D</p>
 						</div>
 						<div class="col-9">
-							<!--CHECKBOX-->
+							<h:selectOneMenu class="form-control" id="txt3" value="#{filmFormular.dreiD}" required="true" label="Selector 1:">
+								<f:selectItem itemLabel="nicht 3D" itemValue="false" />
+								<f:selectItem itemLabel="3D" itemValue="true" />
+							</h:selectOneMenu>
+							<p:message for="txt3" />
 						</div>
 					</div>
 					<div class="row">
@@ -174,12 +189,14 @@
 							<p>Effektivität</p>
 						</div>
 						<div class="col-9">
-							<p:inputNumber id="filmEff" value="#{filmFormular.eff}" />
+							<p:inputNumber id="filmEff" value="#{filmFormular.effS}" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col">
+							<br />
 							<h:commandButton value="Speichern" action="#{filmFormular.save}" styleClass="btn btn-kino" />
+							<br />
 						</div>
 					</div>
 				</h:form>

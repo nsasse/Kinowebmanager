@@ -168,8 +168,11 @@ public class FilmFormular implements Serializable{
 	}
 	
 	public void fixBD() {
-		kosten = new BigDecimal(kostenS);
-		eff = new BigDecimal(effS);
+		BigDecimal kostenT = new BigDecimal(kostenS);
+		film.setKosten(kostenT);
+		BigDecimal effT = new BigDecimal(effS);
+		film.setEff(effT);
+		
 	}
 	
 	//Funktion, um den neuen Film in die static Class zu schreiben
@@ -189,10 +192,7 @@ public class FilmFormular implements Serializable{
 		film.setFsk(fsk);
 		film.setSpieldauer(spieldauer);
 		film.setBeliebtheit(beliebtheit);
-		film.setKosten(kosten);
-		film.setDreiD(dreiD);
-		film.setEff(eff);
-		
+		film.setDreiD(false);
 		
 		FilmDaoStaticImpl filmDaoStaticImpl = new FilmDaoStaticImpl();
 		filmDaoStaticImpl.createFilm(film);
