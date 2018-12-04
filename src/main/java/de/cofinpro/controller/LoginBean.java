@@ -48,7 +48,7 @@ public class LoginBean implements Serializable {
 
 		boolean status = false;
 		
-		if (userSecure.equals(user) == true && passwordSecure.equals(password) == true) {
+		if (userSecure.equals(user) && passwordSecure.equals(password)) {
 
 			status = true;
 		}
