@@ -304,5 +304,4 @@ public class Film implements Serializable {
 				+ ", dreiD=" + dreiD + ", eff=" + eff + "]";
 	}
 
-
 }

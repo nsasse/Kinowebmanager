@@ -16,6 +16,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import de.cofinpro.controller.data.DbConnect;
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
 
@@ -133,5 +134,16 @@ public class FileUploadView {
 
 		}
 
+	}
+	
+	public void dbCheck() {
+		
+		String host = new String("localhost:3306");
+		String database = new String("kinowebmanager");
+		String user = new String("admin");
+		String passwd = new String("admin");
+		
+		DbConnect db = new DbConnect();
+		db.connectToMysql(host, database, user, passwd);
 	}
 }
