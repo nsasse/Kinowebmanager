@@ -2,8 +2,9 @@ package de.cofinpro.controller;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Calendar;
-import java.util.Date;
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 
 public class GlobalVariables {
 
@@ -23,15 +24,6 @@ public class GlobalVariables {
 	public final static int DURCHSCHNITT_TAGE_MONAT = 30;
 	public final static int TAGE_FEBRUAR = 28;
 	public final static int TAGE_JAN_MRZ_MAI_JUL = 31;
-	public static Calendar KALENDER;
-	public static Date DATUM;
-	public static int DAY;
-	// Note: +1 the month for current month
-	public static int MONTH;
-	public static int YEAR;
-	public static int DAY_OF_WEEK;
-	public static int DAY_OF_MONTH;
-	public int DAY_OF_YEAR;
 
 	// Film und Programmzeiten
 	public static final int ANZ_FILM_START_ZEITEN = 4;
@@ -43,14 +35,21 @@ public class GlobalVariables {
 	public static final int FILM_START_I3 = 23;
 	public static final int FILM_START_I023_MIN = 0;
 
+	//Ticketpreise
+	public static final int TICKETPREIS_LOGE = 2;
+	public static final int TICKETPREIS_PARKETT = 3;
+	public static final int UMSATZERLOESE_LOGE = 0;
+	public static final int UMSATZERLOESE_PARKETT = 1;
+	
+	//FSK Regelungen
+	public static final int FSK_18 = 18;
+	public static final int FSK_16 = 16;
+	public static final int FSK_12 = 12;
+	public static final int FSK_0 = 0;
+	
+	//Counter stehen bald in der Datenbank
+	
 	public GlobalVariables() {
-		DATUM = KALENDER.getTime();
-		DAY = KALENDER.get(Calendar.DATE);
-		// Note: +1 the month for current month
-		MONTH = KALENDER.get(Calendar.MONTH) + 1;
-		YEAR = KALENDER.get(Calendar.YEAR);
-		DAY_OF_WEEK = KALENDER.get(Calendar.DAY_OF_WEEK);
-		DAY_OF_MONTH = KALENDER.get(Calendar.DAY_OF_MONTH);
-		DAY_OF_YEAR = KALENDER.get(Calendar.DAY_OF_YEAR);
+		
 	}
 }

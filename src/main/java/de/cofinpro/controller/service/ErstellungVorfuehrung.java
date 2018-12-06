@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.cofinpro.controller.GlobalVariables;
 import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
 import de.cofinpro.controller.dao.impl.KinosaalDaoStaticImpl;
 import de.cofinpro.controller.dao.impl.WerbespotDaoStaticImpl;
@@ -18,12 +19,6 @@ import de.cofinpro.modul.Werbespot;
  */
 public class ErstellungVorfuehrung {
 
-	/** The Constant FSK_18. */
-	public static final int FSK_18 = 18;
-	/** The Constant FSK_16. */
-	public static final int FSK_16 = 16;
-	/** The Constant FSK_12. */
-	public static final int FSK_12 = 12;
 	/** The werbespot liste dao. */
 	private WerbespotDaoStaticImpl werbespotListeDao = new WerbespotDaoStaticImpl();
 	/** The film liste dao. */
@@ -46,10 +41,6 @@ public class ErstellungVorfuehrung {
 		werbespotsDbSort = werbespotListeDao.getAllWerbespotSortByEff();
 		kinosaalDbSort = kinosaalListeDao.getAllKinosaalSortSize();
 
-		final int ticketPreisLoge = 2;
-		final int ticketPreisParkett = 3;
-		final int umsatzErloeseLoge = 0;
-		final int umsatzEroeseParkett = 1;
 
 		for (int i = 0; i < filmListeDao.getAllFilmSortByEff().size(); i++) {
 
@@ -66,15 +57,15 @@ public class ErstellungVorfuehrung {
 			// Festlegung der Ticketpreise
 			BigDecimal ticketPreisL = BigDecimal.ZERO;
 			BigDecimal ticketPreisP = BigDecimal.ZERO;
-			ticketPreisL = ticketKundenBerechnung(vorfuehrung.getFilm(), anzKunden).get(ticketPreisLoge);
-			ticketPreisP = ticketKundenBerechnung(vorfuehrung.getFilm(), anzKunden).get(ticketPreisParkett);
+			ticketPreisL = ticketKundenBerechnung(vorfuehrung.getFilm(), anzKunden).get(GlobalVariables.TICKETPREIS_LOGE);
+			ticketPreisP = ticketKundenBerechnung(vorfuehrung.getFilm(), anzKunden).get(GlobalVariables.TICKETPREIS_PARKETT);
 			vorfuehrung.setTicketPreisL(ticketPreisL);
 			vorfuehrung.setTicketPreisP(ticketPreisP);
 
 			ArrayList<BigDecimal> ueTickets = new ArrayList<BigDecimal>();
 			ueTickets = ticketKundenBerechnung(vorfuehrung.getFilm(), getAnzKunden(vorfuehrung.getFilm()));
 			BigDecimal ueTicketGesamt = BigDecimal.ZERO;
-			ueTicketGesamt = ueTickets.get(umsatzEroeseParkett).add(ueTickets.get(umsatzErloeseLoge));
+			ueTicketGesamt = ueTickets.get(GlobalVariables.UMSATZERLOESE_PARKETT).add(ueTickets.get(GlobalVariables.UMSATZERLOESE_LOGE));
 
 			vorfuehrung.setAnzKundenL(anzKunden.get(0));
 			vorfuehrung.setAnzKundenP(anzKunden.get(1));
@@ -133,12 +124,12 @@ public class ErstellungVorfuehrung {
 	public final LocalTime festlegungStart(final int fsk) {
 		LocalTime startzeit = LocalTime.of(0, 0);
 
-		if (fsk >= FSK_18) {
-			startzeit = LocalTime.of(23, 0);
-		} else if (fsk >= FSK_16) {
-			startzeit = LocalTime.of(20, 0);
+		if (fsk >= GlobalVariables.FSK_18) {
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I3, 0);
+		} else if (fsk >= GlobalVariables.FSK_16) {
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I2, 0);
 		} else {
-			startzeit = LocalTime.of(15, 0);
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I0, 0);
 		}
 		return startzeit;
 	}

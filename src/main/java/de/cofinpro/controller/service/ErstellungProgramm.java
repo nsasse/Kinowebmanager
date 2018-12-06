@@ -20,7 +20,7 @@ import de.cofinpro.modul.Vorfuehrung;
  */
 
 public class ErstellungProgramm {
-	
+
 	/** The kinosaele liste dao. */
 	private KinosaalDaoStaticImpl kinosaeleListeDao = new KinosaalDaoStaticImpl();
 
@@ -30,10 +30,10 @@ public class ErstellungProgramm {
 	/** The programm liste dao. */
 	private ProgrammDaoStaticImpl programmListeDao = new ProgrammDaoStaticImpl();
 
-	// Kinoschluss beachten!
+	// Kinoschluss beachten
 	// private static final int MaxFilmLaenge3InMin = 150;
 
-	/** vorfuehrungen */
+	/** The vorfuehrungen. */
 	private ArrayList<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
 
 	/**
@@ -49,9 +49,11 @@ public class ErstellungProgramm {
 		vorfuehrungen = vorfuehrungenListeDao.getAllVorfuehrungSortByGewinn();
 		kinosaeleDao = kinosaeleListeDao.getAllKinosaalSortSize();
 
-		int aktuellerTag = GlobalVariables.DAY;
-		int aktuellerMonat = GlobalVariables.MONTH;
-		final int aktJahr = GlobalVariables.YEAR;
+		//Via FUNKTION!!!!
+		int aktuellerTag = 5; // Counter
+		int aktuellerMonat = 3; // Counter
+		final int aktJahr = 2018;
+		
 		int anzKinosaele = kinosaeleListeDao.getAllKinosaalSortSize().size();
 		int id = 90000; // ID Counter
 
