@@ -3,6 +3,7 @@ package de.cofinpro.controller.importer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.primefaces.model.UploadedFile;
 import de.cofinpro.controller.data.DbConnect;
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
+import de.cofinpro.modul.Film;
 
 @SuppressWarnings("restriction")
 @ManagedBean(name = "fileUploadView")
@@ -138,12 +140,28 @@ public class FileUploadView {
 	
 	public void dbCheck() {
 		
-		String host = new String("localhost:3306");
-		String database = new String("kinowebmanager");
-		String user = new String("admin");
-		String passwd = new String("admin");
-		
 		DbConnect db = new DbConnect();
-		db.connectToMysql(host, database, user, passwd);
+		db.connectToMysql();
+		
+		//Testfilm erstllen
+		BigDecimal kosten = new BigDecimal(120);
+		BigDecimal eff = new BigDecimal(50);
+		
+		Film film = new Film();
+		film.setBeliebtheit(50);
+		film.setDreiD(false);
+		film.setEff(eff);
+		film.setErscheinungsjahr(2000);
+		film.setErscheinungsland("Deutschland");
+		film.setFsk(6);
+		film.setGenre("Drama");
+		film.setId(99);
+		film.setKosten(kosten);
+		film.setName("TEST!12345");
+		film.setRegisseur("TESTReges");
+		film.setSpieldauer(120);
+		film.setSprache("deutsch");
+		
+		db.saveFilm(film);
 	}
 }

@@ -42,7 +42,9 @@ public class FilmDaoStaticImpl implements FilmDAO {
 	}
 
 	public final void createFilm(final Film film) {
-		FilmDaoStaticImpl.filme.add(film);
+		FilmDaoStaticImpl.filme.add(film); // Static Class
+
+		
 
 		System.out.println("Der Name von Film Nr." + film.getId() + ", " + film.getName()
 				+ ", wird in der Datenbank hinzugefügt.");

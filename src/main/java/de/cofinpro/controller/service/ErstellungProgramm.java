@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import de.cofinpro.controller.GlobalVariables;
 import de.cofinpro.controller.dao.impl.KinosaalDaoStaticImpl;
 import de.cofinpro.controller.dao.impl.ProgrammDaoStaticImpl;
 import de.cofinpro.controller.dao.impl.VorfuehrungDaoStaticImpl;
@@ -19,11 +20,7 @@ import de.cofinpro.modul.Vorfuehrung;
  */
 
 public class ErstellungProgramm {
-
-	final static int DURCHSCHNITT_TAGE_MONAT = 30;
-	final static int TAGE_FEBRUAR = 28;
-	final static int TAGE_JAN_MRZ_MAI_JUL = 31;
-
+	
 	/** The kinosaele liste dao. */
 	private KinosaalDaoStaticImpl kinosaeleListeDao = new KinosaalDaoStaticImpl();
 
@@ -33,34 +30,10 @@ public class ErstellungProgramm {
 	/** The programm liste dao. */
 	private ProgrammDaoStaticImpl programmListeDao = new ProgrammDaoStaticImpl();
 
-	/** The Constant ANZ_FILM_START_ZEITEN. */
-	private static final int ANZ_FILM_START_ZEITEN = 4;
-
-	/** The Constant ANZ_TAGE_PROGRAMM. */
-	private static final int ANZ_TAGE_PROGRAMM = 21;
-
-	/** The Constant FILM_START_I0. */
-	private static final int FILM_START_I0 = 15;
-
-	/** The Constant FILM_START_I1_H. */
-	private static final int FILM_START_I1_H = 17;
-
-	/** The Constant FILM_START_I1_MIN. */
-	private static final int FILM_START_I1_MIN = 30;
-
-	/** The Constant FILM_START_I2. */
-	private static final int FILM_START_I2 = 20;
-
-	/** The Constant FILM_START_I3. */
-	private static final int FILM_START_I3 = 23;
-
-	/** The Constant FILM_START_I023_MIN. */
-	private static final int FILM_START_I023_MIN = 0;
-
-	// Kinoschluss beachten
+	// Kinoschluss beachten!
 	// private static final int MaxFilmLaenge3InMin = 150;
 
-	/** The vorfuehrungen. */
+	/** vorfuehrungen */
 	private ArrayList<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
 
 	/**
@@ -76,19 +49,19 @@ public class ErstellungProgramm {
 		vorfuehrungen = vorfuehrungenListeDao.getAllVorfuehrungSortByGewinn();
 		kinosaeleDao = kinosaeleListeDao.getAllKinosaalSortSize();
 
-		int aktuellerTag = 5; // Counter
-		int aktuellerMonat = 3; // Counter
-		final int aktJahr = 2018;
+		int aktuellerTag = GlobalVariables.DAY;
+		int aktuellerMonat = GlobalVariables.MONTH;
+		final int aktJahr = GlobalVariables.YEAR;
 		int anzKinosaele = kinosaeleListeDao.getAllKinosaalSortSize().size();
 		int id = 90000; // ID Counter
 
-		for (int i = 0; i < ANZ_TAGE_PROGRAMM; i++) {
+		for (int i = 0; i < GlobalVariables.ANZ_TAGE_PROGRAMM; i++) {
 			Programm programmTag = new Programm();
 			LocalDate programmTagDatum = LocalDate.of(aktJahr, aktuellerMonat, aktuellerTag);
 
 			programmTag.setStart(programmTagDatum);
 
-			for (int j = 0; j < ANZ_FILM_START_ZEITEN; j++) {
+			for (int j = 0; j < GlobalVariables.ANZ_FILM_START_ZEITEN; j++) {
 				for (int k = 0; k < anzKinosaele; k++) {
 					Vorfuehrung programmTagVorfuehrung = new Vorfuehrung();
 					int anzSitzeL = kinosaeleDao.get(k).getAnzSitzeL();
@@ -96,23 +69,23 @@ public class ErstellungProgramm {
 
 					programmTagVorfuehrung.setStartzeit(startVorfuehrung(j));
 
-					if (programmTagVorfuehrung.getStartzeit().getHour() == FILM_START_I0) {
+					if (programmTagVorfuehrung.getStartzeit().getHour() == GlobalVariables.FILM_START_I0) {
 
 						programmTagVorfuehrung = setVorfuehrungKinosaal(vorfuehrungFsk12, anzSitzeL, anzSitzeP,
 								kinosaeleDao, k);
 						programmTagVorfuehrung.setStartzeit(startVorfuehrung(j));
 
-					} else if (programmTagVorfuehrung.getStartzeit().getHour() == FILM_START_I1_H) {
+					} else if (programmTagVorfuehrung.getStartzeit().getHour() == GlobalVariables.FILM_START_I1_H) {
 						programmTagVorfuehrung = setVorfuehrungKinosaal(vorfuehrungFsk12, anzSitzeL, anzSitzeP,
 								kinosaeleDao, k);
 						programmTagVorfuehrung.setStartzeit(startVorfuehrung(j));
 
-					} else if (programmTagVorfuehrung.getStartzeit().getHour() == FILM_START_I2) {
+					} else if (programmTagVorfuehrung.getStartzeit().getHour() == GlobalVariables.FILM_START_I2) {
 						programmTagVorfuehrung = setVorfuehrungKinosaal(vorfuehrungFsk16, anzSitzeL, anzSitzeP,
 								kinosaeleDao, k);
 						programmTagVorfuehrung.setStartzeit(startVorfuehrung(j));
 
-					} else if (programmTagVorfuehrung.getStartzeit().getHour() == FILM_START_I3) {
+					} else if (programmTagVorfuehrung.getStartzeit().getHour() == GlobalVariables.FILM_START_I3) {
 						programmTagVorfuehrung = setVorfuehrungKinosaal(vorfuehrungen, anzSitzeL, anzSitzeP,
 								kinosaeleDao, k);
 						programmTagVorfuehrung.setStartzeit(startVorfuehrung(j));
@@ -146,17 +119,17 @@ public class ErstellungProgramm {
 			programmListe.add(programmTag);
 			id++;
 
-			if (aktuellerTag > DURCHSCHNITT_TAGE_MONAT) {
+			if (aktuellerTag > GlobalVariables.DURCHSCHNITT_TAGE_MONAT) {
 				if (aktuellerMonat == 4 || aktuellerMonat == 6) {
 					aktuellerTag = 1;
 					aktuellerMonat++;
 				}
-			} else if (aktuellerTag > TAGE_FEBRUAR) {
+			} else if (aktuellerTag > GlobalVariables.TAGE_FEBRUAR) {
 				if (aktuellerMonat == 2) {
 					aktuellerTag = 1;
 					aktuellerMonat++;
 				}
-			} else if (aktuellerTag > TAGE_JAN_MRZ_MAI_JUL) {
+			} else if (aktuellerTag > GlobalVariables.TAGE_JAN_MRZ_MAI_JUL) {
 				if (aktuellerMonat == Calendar.JANUARY || aktuellerMonat == Calendar.MARCH
 						|| aktuellerMonat == Calendar.MAY) {
 					aktuellerTag = 1;
@@ -206,13 +179,13 @@ public class ErstellungProgramm {
 	private LocalTime startVorfuehrung(final int j) {
 		LocalTime startzeit = LocalTime.now();
 		if (j == 0) {
-			startzeit = LocalTime.of(FILM_START_I0, FILM_START_I023_MIN);
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I0, GlobalVariables.FILM_START_I023_MIN);
 		} else if (j == 1) {
-			startzeit = LocalTime.of(FILM_START_I1_H, FILM_START_I1_MIN);
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I1_H, GlobalVariables.FILM_START_I1_MIN);
 		} else if (j == 2) {
-			startzeit = LocalTime.of(FILM_START_I2, FILM_START_I023_MIN);
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I2, GlobalVariables.FILM_START_I023_MIN);
 		} else if (j == 3) {
-			startzeit = LocalTime.of(FILM_START_I3, FILM_START_I023_MIN);
+			startzeit = LocalTime.of(GlobalVariables.FILM_START_I3, GlobalVariables.FILM_START_I023_MIN);
 		}
 
 		return startzeit;
