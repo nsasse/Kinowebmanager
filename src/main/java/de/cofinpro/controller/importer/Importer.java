@@ -3,12 +3,13 @@ package de.cofinpro.controller.importer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 
 public abstract class Importer {
 
-	public abstract void readCsvFile(BufferedReader br) throws IOException;
+	public abstract void readCsvFile(BufferedReader br) throws IOException, SQLException;
 
 	public abstract void transform(String[] input);
 

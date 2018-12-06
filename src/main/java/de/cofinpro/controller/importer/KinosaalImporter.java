@@ -10,7 +10,7 @@ import de.cofinpro.modul.Kinosaal;
 
 public class KinosaalImporter extends Importer {
 
-	int id = 0;
+	int id = 10000;
 
 	public ArrayList<Kinosaal> kinosaeleListe = new ArrayList<Kinosaal>();
 

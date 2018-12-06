@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.cofinpro.controller.dao.FilmDAO;
+import de.cofinpro.controller.data.DbConnect;
 import de.cofinpro.controller.service.FilmComparator;
 import de.cofinpro.modul.Film;
 
 public class FilmDaoStaticImpl implements FilmDAO {
 
 	private static List<Film> filme = new ArrayList<Film>();
+	private static int ID_COUNTER = 50000;
 
 	public FilmDaoStaticImpl() {
 		super();
@@ -41,13 +43,16 @@ public class FilmDaoStaticImpl implements FilmDAO {
 		return filme.get(id);
 	}
 
+	//Film in statischer Klasse speichern
 	public final void createFilm(final Film film) {
+		film.setId(ID_COUNTER);
 		FilmDaoStaticImpl.filme.add(film); // Static Class
 
+		/*
+		 * System.out.println("Der Name von Film Nr." + film.getId() + ", " +
+		 * film.getName() + ", wird in der Datenbank hinzugefügt."); 
+		 */
 		
-
-		System.out.println("Der Name von Film Nr." + film.getId() + ", " + film.getName()
-				+ ", wird in der Datenbank hinzugefügt.");
 		/*
 		 * JOptionPane.showMessageDialog(null, "Der Name von Film Nr." + film.getId() +
 		 * ", " + film.getName() + ", wird in der Datenbank hinzugefügt.",
@@ -55,6 +60,15 @@ public class FilmDaoStaticImpl implements FilmDAO {
 		 */
 
 	}
+	//Film in Datenbank speichern
+	public final void createFilm(DbConnect db, final Film film) {
+		
+		film.setId(ID_COUNTER);
+		ID_COUNTER++;	
+		db.saveFilm(film);
+	}
+	
+	
 
 	public final List<Film> getFilme() {
 		return filme;

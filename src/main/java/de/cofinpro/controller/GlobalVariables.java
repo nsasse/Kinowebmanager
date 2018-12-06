@@ -17,6 +17,7 @@ public class GlobalVariables {
 	public final static String DATABASE = new String("kinowebmanager");
 	public final static String USER = new String("admin");
 	public final static String PASSWORD = new String("admin");
+	public final static String DATABASE_TABLE = new String("filme");
 
 	// Tage & Wochenparameter
 	public final static int DURCHSCHNITT_TAGE_MONAT = 30;
