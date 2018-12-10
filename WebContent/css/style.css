@@ -9,6 +9,11 @@ html, body{
     margin: 1%;
 }
 
+#bootstrap-overrides .logo {
+  max-height: 8vh !important;
+}
+
+
 /*Funktioniert nicht*/
 .xheader{
 background-color: #ED7F00 !important;

@@ -11,53 +11,54 @@
 </h:head>
 <h:body>
 	<nav class="navbar navbar-expand-lg align-middle xheader">
-		<div class="col-1"></div>
-		<div class="col-3">
+		<div class="col"></div>
+		<div class="col">
 			<a class="navbar-brand" href="index.xhtml">
-				<img src="resources/img/kinomanager.png" alt="logo" /><br />
+				<img src="resources/img/logo.png" class="logo" alt="logo" /><br />
 			</a>
 		</div>
-		<div class="col-3">
-			<h3 class="headerTitle">Kinowebmanager</h3>
+		<div class="col">
+			<h3 class="headerTitle">Startseite</h3>
 		</div>
-		<div class="col-2"></div>
-		<div class="col-2">
+		<div class="col"></div>
+		<div class="col">
 			<h:form>
 				<h:commandButton value="Login" action="#{loginBean.start}" styleClass="btn btn-kino" />
 			</h:form>
 		</div>
-		<div class="col-1"></div>
+		<div class="col"></div>
 	</nav>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-1"></div>
-			<div class="col-10">
+			<div class="hidden-sm col-lg-1"></div>
+			<div class="col-sm-12 col-lg-10">
 				<br />
 				<h2>Wilkommen</h2> <br />
 			</div>
-			<div class="col-1"></div>
+			<div class="hidden-sm col-lg-1"></div>
 		</div>
 		<p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
 			<p:graphicImage name="resources/img/#{image}" alt="Image Description for #{image}" title="#{image}" />
 		</p:galleria>
 	</div>
 	<div class="row">
-		<div class="col-1"></div>
-		<div class="col-10">
+		<div class="hidden-sm col-lg-1"></div>
+		<div class="col-sm-12 col-lg-10">
 			<br />
 			<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
 				<p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
 			</p:dialog>
 			<h:form>
 				<br />
-				<p:commandButton class="btn btn-kino" value="Download Programmplan" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="pi pi-arrow-down">
+				<p:commandButton class="btn btn-kino" value="Download Programmplan" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+				 icon="pi pi-arrow-down">
 					<p:fileDownload value="#{fileDownloadView.file}" />
-				<br />
+					<br />
 				</p:commandButton>
 			</h:form>
 		</div>
-		<div class="col-1"></div>
+		<div class="hidden-sm col-lg-1"></div>
 	</div>
 
 	<noscript>

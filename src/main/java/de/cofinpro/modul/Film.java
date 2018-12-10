@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Film implements Serializable {
 
 	@Id
-	@GeneratedValue
+	//@GeneratedValue -> Festlegung durch Datenbank
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "name")
@@ -36,9 +36,9 @@ public class Film implements Serializable {
 	private Integer beliebtheit;
 	@Column(name = "kosten")
 	private BigDecimal kosten;
-	@Column (name = "dreiD")
+	//@Column (name = "dreiD")
 	private boolean dreiD;
-	@Column (name = "eff")
+	//@Column (name = "eff")
 	private BigDecimal eff;
 	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk>_vorfuehrung")

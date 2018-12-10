@@ -11,55 +11,59 @@
 </h:head>
 <h:body>
     <nav class="navbar navbar-expand-lg xheader">
-        <div class="col-1"></div>
-        <div class="col-3">
+        <div class="col"></div>
+        <div class="col">
             <a class="navbar-brand" href="index.xhtml">
-                <img src="resources/img/kinomanager.png" alt="logo" /><br />
+                <img src="resources/img/logo.png" alt="logo" /><br />
             </a>
         </div>
-        <div class="col-3">
-            <h3 class="headerTitle">Kinowebmanager - Login</h3>
+        <div class="col">
+            <h3 class="headerTitle">Login</h3>
         </div>
-        <div class="col-2"></div>
-        <div class="col-2">
+        <div class="col"></div>
+        <div class="col pull-right">
             <h:form>
                 <h:commandButton value="Zurück" action="#{mainBean.start}" styleClass="btn btn-kino" />
             </h:form>
         </div>
-        <div class="col-1"></div>
+        <div class="col"></div>
     </nav>
 
     <div class="container">
         <h:form>
             <div class="row">
-                <div class="col-3">
+                <div class="hidden-sm col-lg-1"></div>
+                <div class="col-sm-4 col-lg-3">
                     <br />
                     <p>Benutzername</p>
                 </div>
-                <div class="col-9">
+                <div class="col-sm-8 col-lg-7">
                     <br />
                     <h:inputText id="username" value="#{loginBean.user}" styleClass="form-control" />
                     <br />
                 </div>
+                <div class="hidden-sm col-lg-1"></div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="hidden-sm col-lg-1"></div>
+                <div class="col-sm-4 col-lg-3">
                     <p>Kennwort</p>
                 </div>
-                <div class="col-9">
+                <div class="col-sm-8 col-lg-7">
                     <p:password id="password" value="#{loginBean.password}" styleClass="form-control" />
                     <br />
                 </div>
+                <div class="hidden-sm col-lg-1"></div>
             </div>
             <div class="row">
-                <div class="col-9"></div>
+                <div class="hidden-sm col-lg-8"></div>
                 <!--Zurückbutton-->
-                <div class="col-2">
+                <div class="col-sm-12 col-lg-3">
                     <br />
                     <h:commandButton value="Login" action="#{loginBean.check}" styleClass="btn btn-kino" />
                     <br />
                 </div>
-                <div class="col-1"></div>
+                <div class="hidden-sm col-lg-1"></div>
             </div>
         </h:form>
     </div>
