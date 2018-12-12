@@ -2,6 +2,7 @@ package de.cofinpro.controller.exporter;
 
 import org.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import de.cofinpro.modul.Programm;
 import de.cofinpro.modul.Vorfuehrung;
@@ -20,7 +21,7 @@ public class WriteExcelFileProgramm {
 		// Create a Workbook
 		
 		@SuppressWarnings("resource")
-		Workbook workbook = null;//new XSSFWorkbook(); 
+		Workbook workbook = new XSSFWorkbook(); 
 
 		for (int p = 0; p < programmListe.size(); p++) {
 			// Create a Sheet
@@ -104,10 +105,12 @@ public class WriteExcelFileProgramm {
 		}
 
 		// Write the output to a file
-		FileOutputStream fileOut = new FileOutputStream("C:/dev/ProgrammExport.xlsx");
+		FileOutputStream fileOut = new FileOutputStream("ProgrammExport.xlsx");
 		workbook.write(fileOut);
 		fileOut.close();
 
+		//FELHER!!! NULLPointerEx
+		
 		System.out.println("ProgrammExport.xlsx wurde erstellt.");
 	}
 }
