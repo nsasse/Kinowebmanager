@@ -51,6 +51,11 @@
 			<version>5.3.7.Final</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${version.org.hibernate}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging</artifactId>
 			<version>3.3.0.Final</version>
