@@ -12,14 +12,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openxml4j.exceptions.InvalidFormatException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import de.cofinpro.controller.dataView.DataTableColumn;
 import de.cofinpro.controller.dataView.TableItem;
 
-@SuppressWarnings("restriction")
 @ManagedBean(name = "fileUploadView")
 @SessionScoped
 

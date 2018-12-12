@@ -1,8 +1,7 @@
 package de.cofinpro.controller.exporter;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -34,7 +33,7 @@ public class WriteExcelFileRaumplan {
 
 		// Create a Workbook
 		@SuppressWarnings("resource")
-		Workbook workbook = new XSSFWorkbook();
+		Workbook workbook = null; //new XSSFWorkbook();
 
 		// Create a Sheet
 

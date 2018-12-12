@@ -24,7 +24,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	public void start() throws IOException {
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/Kinowebmanager/login.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 	}
 
 	public String getUser() {
@@ -60,7 +60,7 @@ public class LoginBean implements Serializable {
 		
 		if (status == true) {
 			System.out.println("PW true");
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/Kinowebmanager/admin.xhtml"); 
+			FacesContext.getCurrentInstance().getExternalContext().redirect("admin.xhtml"); 
 		}
 		else {
 			System.out.println("PW false");
