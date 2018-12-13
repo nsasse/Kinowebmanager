@@ -4,12 +4,12 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @SuppressWarnings("serial")
-//@Entity
-@Table(name = "Kinosaal")
+@Entity
+@Table(name = "kinosaal")
 
 public class Kinosaal implements Serializable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "anzSitzeL")

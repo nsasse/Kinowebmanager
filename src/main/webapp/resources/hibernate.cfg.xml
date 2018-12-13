@@ -6,18 +6,15 @@
 <hibernate-configuration>
  
   <session-factory>
+      <!-- SQL dialect -->
+      <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+      
       <!-- Database connection settings -->
       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-      <property name="connection.url">jdbc:mysql://tran-vmware:3306/simplehr?serverTimezone=UTC</property>
-      <property name="connection.username">root</property>
-      <property name="connection.password">1234</property>
- 
-      <!-- JDBC connection pool (use the built-in) -->
-      <property name="connection.pool_size">1</property>
- 
-      <!-- SQL dialect -->
-      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
- 
+      <property name="connection.url">jdbc:mysql://localhost:3306/kinowebmanager</property>
+      <property name="connection.username">admin</property>
+      <property name="connection.password">admin</property>
+  
       <!-- Enable Hibernate's automatic session context management -->
       <property name="current_session_context_class">thread</property>
  
@@ -26,11 +23,12 @@
  
       <!-- Echo all executed SQL to stdout -->
       <property name="show_sql">true</property>
+      
+      <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
  
-      <mapping class="org.o7planning.tutorial.hibernate.entities.Department" />
-      <mapping class="org.o7planning.tutorial.hibernate.entities.Employee" />
-      <mapping class="org.o7planning.tutorial.hibernate.entities.SalaryGrade" />
-      <mapping class="org.o7planning.tutorial.hibernate.entities.Timekeeper" />
+      <mapping class="de.cofinpro.modul.Film" />
+      <mapping class="de.cofinpro.modul.Kinosaal" />
+      <mapping class="de.cofinpro.modul.Werbespot" />
  
   </session-factory>
  

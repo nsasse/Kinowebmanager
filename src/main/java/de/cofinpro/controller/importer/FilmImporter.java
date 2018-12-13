@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
-import de.cofinpro.controller.data.DbConnect;
 import de.cofinpro.modul.Film;
 
 public class FilmImporter extends Importer{
@@ -16,12 +15,13 @@ public class FilmImporter extends Importer{
 
 	public ArrayList<Film> filmListe = new ArrayList<Film>();
 	FilmDaoStaticImpl sFilmListe = new FilmDaoStaticImpl();
-	DbConnect db = new DbConnect();
+	//Umgestellt auf Hibernate
+	//DbConnect db = new DbConnect();
 
 	@Override
 	public void readCsvFile(BufferedReader br) throws IOException {
 
-		db.connectToMysql();
+		//db.connectToMysql();
 		
 		String line = "";
 		String cvsSplitBy = ";";
@@ -81,7 +81,7 @@ public class FilmImporter extends Importer{
 
 		if (beliebtheit != 0) {
 			sFilmListe.createFilm(filme1);
-			sFilmListe.createFilm(db, filme1);
+			sFilmListe.createFilm(filme1);
 			id++;
 		}
 

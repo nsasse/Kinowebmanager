@@ -5,23 +5,19 @@ import java.math.BigDecimal;
 import javax.persistence.*;
 
 @SuppressWarnings("serial")
-//@Entity
+@Entity
 @Table(name = "werbespot")
 
 public class Werbespot implements Serializable {
 
 	@Id
-	@GeneratedValue
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "name")
 	private String name;
-
 	@Column(name = "laufzeit")
 	private int laufzeit;
-
 	@Column(name = "verguetung")
 	private BigDecimal verguetung;
 	@Column(name = "eff")
