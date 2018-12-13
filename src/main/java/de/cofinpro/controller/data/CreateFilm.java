@@ -18,10 +18,10 @@ public class CreateFilm {
 	public void create() {
 		
 		BigDecimal kosten = new BigDecimal(120);
-		BigDecimal eff = new BigDecimal(50);
+		//BigDecimal eff = new BigDecimal(50);
 		
 		// Datenbank
-		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("KinoPersistence");
+		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("kino");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
 		
@@ -29,13 +29,10 @@ public class CreateFilm {
 		Film film = new Film();
 
 		film.setBeliebtheit(50);
-		film.setDreiD(false);
-		film.setEff(eff);
 		film.setErscheinungsjahr(2000);
 		film.setErscheinungsland("Deutschland");
 		film.setFsk(6);
 		film.setGenre("Drama");
-		film.setId(99);
 		film.setKosten(kosten);
 		film.setName("TEST!12345");
 		film.setRegisseur("TESTReges");

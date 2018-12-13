@@ -105,7 +105,7 @@ public class WriteExcelFileProgramm {
 		}
 
 		// Write the output to a file
-		FileOutputStream fileOut = new FileOutputStream("ProgrammExport.xlsx");
+		FileOutputStream fileOut = new FileOutputStream("resources/xlsx/ProgrammExport.xlsx");
 		workbook.write(fileOut);
 		fileOut.close();
 

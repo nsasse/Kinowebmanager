@@ -14,7 +14,7 @@ public class FileDownloadView {
     private StreamedContent file;
      
     public FileDownloadView() {        
-        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("ProgrammExport.xlsx");
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("resources/xlsx/ProgrammExport.xlsx");
         file = new DefaultStreamedContent(stream, "xlsx", "ProgrammExport.xlsx");
     }
  

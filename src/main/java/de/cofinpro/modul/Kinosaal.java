@@ -1,30 +1,27 @@
 package de.cofinpro.modul;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.*;
+
 @SuppressWarnings("serial")
-@Entity
+//@Entity
 @Table(name = "Kinosaal")
 
 public class Kinosaal implements Serializable {
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	@Column(name="anzSitzeL")
+	@Column(name = "anzSitzeL")
 	private int anzSitzeL;
-	@Column(name="anzSitzeP")
+	@Column(name = "anzSitzeP")
 	private int anzSitzeP;
-	@Column(name="dreiD")
+	@Column(name = "dreiD")
 	private boolean dreiD;
-	@OneToMany(mappedBy = "kinosaal", fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_vorfuehrung")
-	private List<Vorfuehrung> vorfuehrung;
-	
-	
-	
+	// @OneToMany(mappedBy = "kinosaal", fetch = FetchType.LAZY)
+	// @JoinColumn(name = "fk_vorfuehrung")
+	//private List<Vorfuehrung> vorfuehrung;
+
 	public Kinosaal() {
 		// TODO Auto-generated constructor stub
 	}
@@ -68,12 +65,10 @@ public class Kinosaal implements Serializable {
 	public void setDreiD(boolean dreiD) {
 		this.dreiD = dreiD;
 	}
-	
-	
 
 	@Override
 	public final String toString() {
-		return "Kinosaal [id=" + id +", anzSitzeL=" + anzSitzeL + ", anzSitzeP=" + anzSitzeP + ", dreiD=" + dreiD
+		return "Kinosaal [id=" + id + ", anzSitzeL=" + anzSitzeL + ", anzSitzeP=" + anzSitzeP + ", dreiD=" + dreiD
 				+ "]";
 	}
 

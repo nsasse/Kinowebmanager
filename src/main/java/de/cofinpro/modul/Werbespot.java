@@ -2,12 +2,10 @@ package de.cofinpro.modul;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
+
 @SuppressWarnings("serial")
-@Entity
+//@Entity
 @Table(name = "werbespot")
 
 public class Werbespot implements Serializable {
@@ -28,11 +26,11 @@ public class Werbespot implements Serializable {
 	private BigDecimal verguetung;
 	@Column(name = "eff")
 	private BigDecimal eff;
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "werbespot_vorfuerung", joinColumns = {
-			@JoinColumn(name = "werbespot_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "vorfuehrung_id", nullable = false, updatable = false) })
-	private List<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(name = "werbespot_vorfuerung", joinColumns = {
+	// @JoinColumn(name = "werbespot_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+	// @JoinColumn(name = "vorfuehrung_id", nullable = false, updatable = false) })
+	// private List<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
 
 	public Werbespot() {
 		// TODO Auto-generated constructor stub

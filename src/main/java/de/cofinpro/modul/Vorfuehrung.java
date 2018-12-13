@@ -6,17 +6,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
-@Entity
+//@Entity
 @Table(name = "verfuehrung")
 
 public class Vorfuehrung implements Serializable {
@@ -43,20 +38,20 @@ public class Vorfuehrung implements Serializable {
 	@Column(name = "TicketPreisP")
 	private BigDecimal ticketPreisP;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	//@ManyToOne(fetch = FetchType.EAGER)
 	@Column(name = "film")
 	private Film film;
 
-	@ManyToMany(mappedBy = "vorfuehrungen", fetch = FetchType.EAGER)
+	//@ManyToMany(mappedBy = "vorfuehrungen", fetch = FetchType.EAGER)
 	@Column(name = "werbespots")
 	private List<Werbespot> werbespots = new ArrayList<Werbespot>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	//@ManyToOne(fetch = FetchType.EAGER)
 	@Column(name = "kinosaal")
 	private Kinosaal kinosaal;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_programm")
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "fk_programm")
 	private Programm programm;
 
 	public Vorfuehrung() {
