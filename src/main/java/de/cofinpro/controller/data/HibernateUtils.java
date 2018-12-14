@@ -13,13 +13,12 @@ public class HibernateUtils {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			
-			
 			// Create the ServiceRegistry from hibernate.cfg.xml
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()//
-					.configure("resources/hibernate.cfg.xml").build();
+					.configure("hibernate.cfg.xml").build();
 			
 			//!!!!!!!!!!!!!!!!!!!!!
-			//Pfad überprüfen
+			//Pfad überprüfen - Die Datei wird nicht gefunden
 			
 			// Create a metadata sources using the specified service registry.
 			Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
