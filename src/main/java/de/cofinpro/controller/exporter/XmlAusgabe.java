@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openxml4j.exceptions.InvalidFormatException;
 import de.cofinpro.controller.dao.impl.ProgrammDaoStaticImpl;
 import de.cofinpro.controller.service.ErstellungProgramm;
 import de.cofinpro.modul.Programm;

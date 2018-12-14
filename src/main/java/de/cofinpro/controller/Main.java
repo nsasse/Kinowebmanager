@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openxml4j.exceptions.InvalidFormatException;
 
 @ManagedBean(name="mainBean")
 @SessionScoped
@@ -20,7 +20,7 @@ public class Main {
 	}
 	
 	public void start() throws IOException {
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/Kinowebmanager/index.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	
 }

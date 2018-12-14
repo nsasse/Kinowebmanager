@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.persistence.*;
 
 @SuppressWarnings("serial")
-@Entity
+//@Entity
 @Table(name = "Programm")
 
 public class Programm implements Serializable {
@@ -26,7 +26,7 @@ public class Programm implements Serializable {
 	private BigDecimal gewinn;
 	@Column(name = "kosten")
 	private BigDecimal kosten;
-	@OneToMany(mappedBy = "programm", fetch = FetchType.EAGER)
+	//@OneToMany(mappedBy = "programm", fetch = FetchType.EAGER)
 	private ArrayList<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
 
 	public Programm() {

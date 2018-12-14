@@ -7,22 +7,22 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
-import de.cofinpro.controller.data.DbConnect;
+import de.cofinpro.controller.data.Creator;
 import de.cofinpro.modul.Film;
 
-public class FilmImporter extends Importer{
+public class FilmImporter extends Importer {
 
 	int id = 20000;
 
+	// Datenbankupload starten
+	Creator filmcreator = new Creator();
+
 	public ArrayList<Film> filmListe = new ArrayList<Film>();
 	FilmDaoStaticImpl sFilmListe = new FilmDaoStaticImpl();
-	DbConnect db = new DbConnect();
 
 	@Override
 	public void readCsvFile(BufferedReader br) throws IOException {
 
-		db.connectToMysql();
-		
 		String line = "";
 		String cvsSplitBy = ";";
 
@@ -30,7 +30,6 @@ public class FilmImporter extends Importer{
 
 			while ((line = br.readLine()) != null) {
 				String[] stringDateityp = line.split(cvsSplitBy);
-
 				transform(stringDateityp);
 			}
 		}
@@ -48,7 +47,6 @@ public class FilmImporter extends Importer{
 				}
 			}
 		}
-		
 	}
 
 	public final void transform(final String[] input) {
@@ -76,13 +74,12 @@ public class FilmImporter extends Importer{
 		filme1.setErscheinungsjahr(erscheinungsjahr);
 		filme1.setDreiD(dreiD);
 
-		
-		//VORHER new FILMDAOSTATICIMPL
-
 		if (beliebtheit != 0) {
 			sFilmListe.createFilm(filme1);
-			sFilmListe.createFilm(db, filme1);
 			id++;
+
+			filmcreator.createFilm(filme1);
+
 		}
 
 	}

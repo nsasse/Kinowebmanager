@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Kinowebmanager - Login</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+</h:head>
+<h:body>
+    <nav class="navbar navbar-expand-lg xheader">
+        <div class="col"></div>
+        <div class="col">
+            <a class="navbar-brand" href="index.xhtml">
+                <img src="resources/img/logo.png" alt="logo" /><br />
+            </a>
+        </div>
+        <div class="col">
+            <h3 class="headerTitle">Login</h3>
+        </div>
+        <div class="col"></div>
+        <div class="col pull-right">
+            <h:form>
+                <h:commandButton value="Zurück" action="#{mainBean.start}" styleClass="btn btn-kino" />
+            </h:form>
+        </div>
+        <div class="col"></div>
+    </nav>
+
+    <div class="container">
+        <h:form>
+            <div class="row">
+                <div class="hidden-sm col-lg-1"></div>
+                <div class="col-sm-4 col-lg-3">
+                    <br />
+                    <p>Benutzername</p>
+                </div>
+                <div class="col-sm-8 col-lg-7">
+                    <br />
+                    <h:inputText id="username" value="#{loginBean.user}" styleClass="form-control" />
+                    <br />
+                </div>
+                <div class="hidden-sm col-lg-1"></div>
+            </div>
+            <div class="row">
+                <div class="hidden-sm col-lg-1"></div>
+                <div class="col-sm-4 col-lg-3">
+                    <p>Kennwort</p>
+                </div>
+                <div class="col-sm-8 col-lg-7">
+                    <p:password id="password" value="#{loginBean.password}" styleClass="form-control" />
+                    <br />
+                </div>
+                <div class="hidden-sm col-lg-1"></div>
+            </div>
+            <div class="row">
+                <div class="hidden-sm col-lg-8"></div>
+                <!--Zurückbutton-->
+                <div class="col-sm-12 col-lg-3">
+                    <br />
+                    <h:commandButton value="Login" action="#{loginBean.check}" styleClass="btn btn-kino" />
+                    <br />
+                </div>
+                <div class="hidden-sm col-lg-1"></div>
+            </div>
+        </h:form>
+    </div>
+    <noscript>
+        Javascript ist nicht verfügbar oder es ist deaktiviert.<br /> <br />
+        Bitte verwenden Sie einen Browser, der Javascript unterstützt<br />
+        oder aktivieren Sie Javascript in Ihrem Browser.<br />
+    </noscript>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
+</h:body>
+
+</html>

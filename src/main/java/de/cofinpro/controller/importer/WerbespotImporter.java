@@ -8,11 +8,15 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import de.cofinpro.controller.dao.impl.WerbespotDaoStaticImpl;
+import de.cofinpro.controller.data.Creator;
 import de.cofinpro.modul.Werbespot;
 
 public class WerbespotImporter extends Importer {
 
 	private int id = 60000;
+	
+	//Datenbankimport starten
+	Creator creator = new Creator();
 
 	@SuppressWarnings("unused")
 	private ArrayList<Werbespot> werbespotListe = new ArrayList<Werbespot>();
@@ -66,6 +70,7 @@ public class WerbespotImporter extends Importer {
 		WerbespotDaoStaticImpl sWerbespotListe = new WerbespotDaoStaticImpl();
 
 		sWerbespotListe.createWerbespot(werbespot1);
+		creator.createWerbespot(werbespot1);
 
 		id++;
 	}

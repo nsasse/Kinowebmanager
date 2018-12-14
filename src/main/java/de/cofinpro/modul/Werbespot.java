@@ -2,10 +2,8 @@ package de.cofinpro.modul;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "werbespot")
@@ -13,26 +11,22 @@ import javax.persistence.*;
 public class Werbespot implements Serializable {
 
 	@Id
-	@GeneratedValue
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "name")
 	private String name;
-
 	@Column(name = "laufzeit")
 	private int laufzeit;
-
 	@Column(name = "verguetung")
 	private BigDecimal verguetung;
 	@Column(name = "eff")
 	private BigDecimal eff;
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "werbespot_vorfuerung", joinColumns = {
-			@JoinColumn(name = "werbespot_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "vorfuehrung_id", nullable = false, updatable = false) })
-	private List<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(name = "werbespot_vorfuerung", joinColumns = {
+	// @JoinColumn(name = "werbespot_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+	// @JoinColumn(name = "vorfuehrung_id", nullable = false, updatable = false) })
+	// private List<Vorfuehrung> vorfuehrungen = new ArrayList<Vorfuehrung>();
 
 	public Werbespot() {
 		// TODO Auto-generated constructor stub

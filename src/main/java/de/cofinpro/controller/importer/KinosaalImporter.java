@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.cofinpro.controller.dao.impl.KinosaalDaoStaticImpl;
+import de.cofinpro.controller.data.Creator;
 import de.cofinpro.modul.Kinosaal;
 
 public class KinosaalImporter extends Importer {
 
 	int id = 10000;
+	
+	//Datenbankimport starten
+	Creator creator = new Creator();
 
 	public ArrayList<Kinosaal> kinosaeleListe = new ArrayList<Kinosaal>();
 
@@ -64,5 +68,7 @@ public class KinosaalImporter extends Importer {
 
 		KinosaalDaoStaticImpl sKinosaalListe = new KinosaalDaoStaticImpl();
 		sKinosaalListe.createKinosaal(kinosaal);
+		
+		creator.createKinosaal(kinosaal);
 	}
 }

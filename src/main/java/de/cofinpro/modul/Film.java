@@ -2,8 +2,6 @@ package de.cofinpro.modul;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
-
 import javax.persistence.*;
 
 
@@ -13,7 +11,7 @@ import javax.persistence.*;
 public class Film implements Serializable {
 
 	@Id
-	//@GeneratedValue -> Festlegung durch Datenbank
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 	@Column(name = "name")
@@ -37,12 +35,14 @@ public class Film implements Serializable {
 	@Column(name = "kosten")
 	private BigDecimal kosten;
 	//@Column (name = "dreiD")
+	@Transient
 	private boolean dreiD;
 	//@Column (name = "eff")
+	@Transient
 	private BigDecimal eff;
-	@OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk>_vorfuehrung")
-	private List<Vorfuehrung> vorfuehrung;
+	//@OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
+//	@JoinColumn(name = "fk_vorfuehrung")
+//	private List<Vorfuehrung> vorfuehrung;
 	
 	
 	public Film() {

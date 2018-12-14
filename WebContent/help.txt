@@ -1,2 +1,0 @@
-<h:input id="name" type="text" class="textfield" value="" placeholder="Name" />
-					<h:input id="amount1" type="number" name="point" class="textfield" step="1" placeholder="Betrag" value="" min="0">
