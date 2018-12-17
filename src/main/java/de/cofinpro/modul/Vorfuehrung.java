@@ -6,9 +6,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 //@Entity
@@ -38,20 +41,23 @@ public class Vorfuehrung implements Serializable {
 	@Column(name = "TicketPreisP")
 	private BigDecimal ticketPreisP;
 
-	//@ManyToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@Column(name = "film")
 	private Film film;
 
 	//@ManyToMany(mappedBy = "vorfuehrungen", fetch = FetchType.EAGER)
-	@Column(name = "werbespots")
+	//@Column(name = "werbespots")
+	@Transient
 	private List<Werbespot> werbespots = new ArrayList<Werbespot>();
 
 	//@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name = "kinosaal")
+	//@Column(name = "kinosaal")
+	@Transient
 	private Kinosaal kinosaal;
 
 	//@ManyToOne(fetch = FetchType.LAZY)
 	//@JoinColumn(name = "fk_programm")
+	@Transient
 	private Programm programm;
 
 	public Vorfuehrung() {

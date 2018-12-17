@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
+import de.cofinpro.controller.dao.impl.FilmDaoImpl;
 import de.cofinpro.modul.Film;
 
 @SuppressWarnings("serial")
@@ -194,7 +194,7 @@ public class FilmFormular implements Serializable{
 		film.setBeliebtheit(beliebtheit);
 		film.setDreiD(false);
 		
-		FilmDaoStaticImpl filmDaoStaticImpl = new FilmDaoStaticImpl();
+		FilmDaoImpl filmDaoStaticImpl = new FilmDaoImpl();
 		filmDaoStaticImpl.createFilm(film);
 		System.out.println("Done");
 	}

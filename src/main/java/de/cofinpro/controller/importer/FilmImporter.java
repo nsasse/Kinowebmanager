@@ -4,21 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-
-import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
-import de.cofinpro.controller.data.Creator;
+import de.cofinpro.controller.dao.impl.FilmDaoImpl;
 import de.cofinpro.modul.Film;
 
 public class FilmImporter extends Importer {
 
 	int id = 20000;
 
-	// Datenbankupload starten
-	Creator filmcreator = new Creator();
-
-	public ArrayList<Film> filmListe = new ArrayList<Film>();
-	FilmDaoStaticImpl sFilmListe = new FilmDaoStaticImpl();
+	FilmDaoImpl filmDAO = new FilmDaoImpl();
 
 	@Override
 	public void readCsvFile(BufferedReader br) throws IOException {
@@ -60,25 +53,23 @@ public class FilmImporter extends Importer {
 		dreiDS = dreiDS.toLowerCase(); // Anpassung des Input-Strings
 		Boolean dreiD = booleanCheck(dreiDS);
 
-		Film filme1 = new Film();
-		filme1.setId(id);
-		filme1.setName(input[0]);
-		filme1.setRegisseur(input[1]);
-		filme1.setFsk(fsk);
-		filme1.setGenre(input[3]);
-		filme1.setKosten(kosten);
-		filme1.setBeliebtheit(beliebtheit);
-		filme1.setSpieldauer(spieldauer);
-		filme1.setSprache(input[7]);
-		filme1.setErscheinungsland(input[8]);
-		filme1.setErscheinungsjahr(erscheinungsjahr);
-		filme1.setDreiD(dreiD);
+		Film film = new Film();
+		film.setId(id);
+		film.setName(input[0]);
+		film.setRegisseur(input[1]);
+		film.setFsk(fsk);
+		film.setGenre(input[3]);
+		film.setKosten(kosten);
+		film.setBeliebtheit(beliebtheit);
+		film.setSpieldauer(spieldauer);
+		film.setSprache(input[7]);
+		film.setErscheinungsland(input[8]);
+		film.setErscheinungsjahr(erscheinungsjahr);
+		film.setDreiD(dreiD);
 
 		if (beliebtheit != 0) {
-			sFilmListe.createFilm(filme1);
-			id++;
 
-			filmcreator.createFilm(filme1);
+			filmDAO.createFilm(film);
 
 		}
 

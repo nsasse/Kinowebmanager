@@ -14,26 +14,7 @@ public class Creator {
 
 	public void createFilm(Film film) {
 
-		Session sessionObj = HibernateUtils.getSessionFactory().openSession();
-
-		try {
-			sessionObj.beginTransaction();
-			sessionObj.save(film);
-			sessionObj.getTransaction().commit();
-
-		}
-
-		catch (Exception sqlException) {
-			if (null != sessionObj.getTransaction()) {
-				System.out.println("\n.......Transaction Is Being Rolled Back.......");
-				sessionObj.getTransaction().rollback();
-			}
-			sqlException.printStackTrace();
-		} finally {
-			if (sessionObj != null) {
-				sessionObj.close();
-			}
-		}
+		
 	}
 	
 	public void createWerbespot(Werbespot werbespot) {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.cofinpro.controller.GlobalVariables;
-import de.cofinpro.controller.dao.impl.FilmDaoStaticImpl;
+import de.cofinpro.controller.dao.impl.FilmDaoImpl;
 import de.cofinpro.controller.dao.impl.KinosaalDaoStaticImpl;
 import de.cofinpro.controller.dao.impl.WerbespotDaoStaticImpl;
 import de.cofinpro.modul.Film;
@@ -22,7 +22,7 @@ public class ErstellungVorfuehrung {
 	/** The werbespot liste dao. */
 	private WerbespotDaoStaticImpl werbespotListeDao = new WerbespotDaoStaticImpl();
 	/** The film liste dao. */
-	private FilmDaoStaticImpl filmListeDao = new FilmDaoStaticImpl();
+	private FilmDaoImpl filmListeDao = new FilmDaoImpl();
 	/** The kinosaal liste dao. */
 	private KinosaalDaoStaticImpl kinosaalListeDao = new KinosaalDaoStaticImpl();
 	/** The vorfuehrungen liste. */
